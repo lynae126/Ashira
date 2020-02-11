@@ -1,0 +1,67 @@
+import discord
+from discord.ext.commands import Bot
+from discord.ext import commands
+import asyncio
+import time
+import math
+from discord.ext import commands
+
+
+Client = discord.Client()
+client = commands.Bot(command_prefix='--')
+
+@client.event
+async def on_ready():
+    print("Bot is ready!")
+
+
+@client.command(name="greet")
+async def greet(ctx, prompt):
+
+	if "h" in prompt:
+		if "a" in prompt:
+			if "l" in prompt:
+				if "o" in prompt:
+					await ctx.send("halo")
+@client.command(name = "c7")
+async def c7(ctx, prompt):
+	encMsg = ""
+	cipherText = prompt
+	for char in cipherText:
+		if char == " ":
+			encMsg += " "
+		else:
+			num = ord(char)
+			num +=7
+			encMsg+=chr(num)
+	print(encMsg)
+	await ctx.send("running encryption! " + str(encMsg))
+
+@client.command(name = "d7")
+async def d7(ctx, prompt):
+	decMsg = ""
+	cipherText = prompt
+	for char in cipherText:
+		if char == " ":
+			decMsg += " "
+		else:
+			num = ord(char)
+			num -=7
+			decMsg +=chr(num)
+	print(decMsg)
+	await ctx.send("running decryption! " + str(decMsg))
+
+@client.command(name = "euros")
+async def euros(ctx, prompt):
+	prompt = 0.00 + float(prompt)
+	if prompt*0.92 - int(prompt*0.92) >0.5:
+		euro =  str(int(prompt*0.92) + 1)
+	else:
+		euro =  str(int(prompt*0.92))
+	await ctx.send("You have $" + str(prompt) + " and " + euro + " euros.")
+
+
+with open("secret.txt","r") as secret_file:
+ 	client.run(secret_file.read())
+
+
